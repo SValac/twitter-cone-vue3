@@ -23,6 +23,24 @@ const generateRefreshToken = (user) => {
 	});
 };
 
+// verify if token is expired
+export const decodeRefreshToken = (token) => {
+	const config = useRuntimeConfig();
+
+	try {
+		return jwt.verify(token, config.jwtRefreshSecret);
+	} catch (error) {}
+};
+
+// decode the acces token
+export const decodeAccessToken = (token) => {
+	const config = useRuntimeConfig();
+
+	try {
+		return jwt.verify(token, config.jwtAccessSecret);
+	} catch (error) {}
+};
+
 // to generate the tokes we need an identifier, in this case user ID
 export const generateTokens = (user) => {
 	const accessToken = generateAccessToken(user);

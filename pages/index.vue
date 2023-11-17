@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 const loading = ref(false);
+const { useAuthUser } = useAuth();
+
+const user = useAuthUser();
 </script>
 
 <template>
@@ -9,7 +12,7 @@ const loading = ref(false);
 			title="Home"
 			:loading="loading"
 		>
-			Home Page
+			{{ user }}
 		</MainSection>
 	</div>
 </template>
