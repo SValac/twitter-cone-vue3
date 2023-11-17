@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode';
 export default () => {
 	// useState is lite version of Pinia to help with state management
 	const useAuthToken = () => useState('auth_token');
@@ -68,6 +69,27 @@ export default () => {
 		});
 	};
 
+	const reRefreshAccessToken = () => {
+		// we nned to decode the acces token we have in memory
+		const authToken = useAuthToken();
+
+		// check if authToken is present, else return
+		if (!authToken.value) {
+			return;
+		}
+
+		// decode the token to get the expiration time
+		const jwt = jwtDecode(authToken.value);
+
+		// now with the expire time we can substract x-minutes and refresh the access token
+		const newRefreshTime = jwt.exp - 60000; // exp - 1 minute
+
+		setTimeout(async () => {
+			await refreshToken();
+			reRefreshAccessToken();
+		}, newRefreshTime);
+	};
+
 	// method that will run every time the page refresh and get the refresh token
 	const initAuth = () => {
 		setIsAuthLoading(true);
@@ -75,6 +97,10 @@ export default () => {
 			try {
 				await refreshToken();
 				await getUser();
+
+				// once we have acces to user we need to re-generate the acces token every x-minutes before the current token expires so the user doest notice anything
+				reRefreshAccessToken();
+
 				resolve(true);
 			} catch (error) {
 				reject(error);
