@@ -26,7 +26,9 @@ model Users {
   // Refresh Token
   refreshToken RefreshToken[]
   // Tweet
-  Tweet Tweet[]
+  tweet Tweet[]
+  // Media Files
+  mediaFiles MediaFile[]
 
 }
 
@@ -61,4 +63,21 @@ model Tweet {
 	replies Tweet[] @relation("replies")
 
 	// MediaFiles
+  mediaFiles MediaFile[]
+}
+
+model MediaFile {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  // url where media file is stored
+  url String
+  providerPublicId String // unique identifier
+  // timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // user who owns the media file
+  user Users @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+  // relation to media file and tweet
+  tweet Tweet? @relation(fields: [tweetId], references: [id])
+  tweetId String? @db.ObjectId
 }
