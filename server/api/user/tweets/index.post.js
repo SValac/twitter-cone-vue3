@@ -1,5 +1,6 @@
 import formidable from 'formidable';
 import { createTweet } from '../../../db/tweets.js';
+import { createMediaFile } from '~/server/db/mediaFiles.js';
 import { tweetTransformer } from '~/server/transformers/tweet.js';
 
 export default defineEventHandler(async (event) => {
@@ -45,7 +46,26 @@ export default defineEventHandler(async (event) => {
 	// create a tweet with tweetData
 	const tweet = await createTweet(tweetData);
 
+	// creating the MediaFiles,
+	// iterating using keys to get the image value
+	// for each file map the key "image"
+	// return createMediaFile for each file
+	// provie fields for MediaFile
+	// returns an Array of Promises saved in variable
+	const filePromises = Object.keys(files).map(async (key) => {
+		return createMediaFile({
+			url: '',
+			providerPublicId: 'random_id',
+			userId: userId,
+			tweetId: tweet.id
+		});
+	});
+
+	// await to complete the FilePromises
+	await Promise.all(filePromises);
+
 	return {
-		tweet: tweetTransformer(tweet)
+		//tweet: tweetTransformer(tweet)
+		files
 	};
 });
