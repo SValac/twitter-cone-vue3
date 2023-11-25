@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
 	// define where this middles is going to be running, if not defined  it will run in all request
 
 	// define endpoints to run the middleware. Using module url-pattern
-	const endpoints = ['/api/auth/user'];
+	const endpoints = ['/api/auth/user', '/api/user/tweets'];
 
 	// checn if this middleware should run in this endpoint
 	const isHandledByThisMiddleware = endpoints.some((endpoint) => {
