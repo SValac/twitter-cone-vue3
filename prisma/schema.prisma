@@ -22,7 +22,12 @@ model Users {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Relation Fields to other models
+  // Refresh Token
   refreshToken RefreshToken[]
+  // Tweet
+  Tweet Tweet[]
+
 }
 
 // in case we need to validate o deny or something else
@@ -35,4 +40,25 @@ model RefreshToken {
 
   userId String @db.ObjectId
   user Users @relation(fields: [userId], references: [id])
+}
+
+// Tweet Model
+model Tweet {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+	text String
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+
+	// Author, teet is related to its author
+	author Users @relation(fields: [authorId], references: [id])
+	authorId String @db.ObjectId
+
+	// a tweet can have some replies
+	// and replyTo means that this tweet is replying to another tweet
+	replyToId String? @db.ObjectId// ? can be null
+	replyTo Tweet? @relation("replies", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	// others tweets con reply to this tweet
+	replies Tweet[] @relation("replies")
+
+	// MediaFiles
 }
