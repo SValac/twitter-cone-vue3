@@ -12,7 +12,8 @@ const user = useAuthUser();
 			title="Home"
 			:loading="loading"
 		>
-			{{ user }}
+			<!-- {{ user }} -->
+			<TweetForm :user="user" />
 		</MainSection>
 	</div>
 </template>

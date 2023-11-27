@@ -73,7 +73,6 @@ export default defineEventHandler(async (event) => {
 	await Promise.all(filePromises);
 
 	return {
-		//tweet: tweetTransformer(tweet)
-		files
+		tweet: tweetTransformer(tweet)
 	};
 });
