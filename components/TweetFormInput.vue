@@ -1,5 +1,10 @@
 <script setup>
+const { twitterBorderColor } = useTailwindConfig();
+
 const text = ref('');
+const imageInput = ref();
+const selectedFile = ref(null);
+const inputImageUrl = ref(null);
 
 const props = defineProps({
 	user: {
@@ -12,8 +17,29 @@ const emits = defineEmits(['on-submit']);
 
 function handleFormSubmit() {
 	emits('on-submit', {
-		text: text.value
+		text: text.value,
+		mediaFiles: [selectedFile.value]
 	});
+}
+
+function handleImageClick() {
+	// Uses ref to click hidden input
+	imageInput.value.click();
+}
+
+function handleImageChange(event) {
+	// when image is select we get the files form the event and saved in a variable
+	const file = event.target.files[0];
+	selectedFile.value = file;
+
+	// use reader to read file
+	const reader = new FileReader();
+
+	// when image load ger the result
+	reader.onload = (event) => {
+		inputImageUrl.value = event.target.result;
+	};
+	reader.readAsDataURL(file);
 }
 </script>
 
@@ -32,7 +58,47 @@ function handleFormSubmit() {
 			<textarea
 				v-model="text"
 				class="w-full h-10 text-lg text-gray-900 placeholder:text-gray-400 bg-transparent border-0 dark:text-white focus:ring-0"
+				placeholder="What's happening?"
 			></textarea>
+		</div>
+	</div>
+	<!-- FILE SELECTOR -->
+	<div class="p-4 pl-16">
+		<img
+			:src="inputImageUrl"
+			v-if="inputImageUrl"
+			alt=""
+			class="rounded-2xl border"
+			:class="twitterBorderColor"
+		/>
+
+		<input
+			type="file"
+			ref="imageInput"
+			accept="image/png, image/gif, image/jpeg"
+			@change="handleImageChange"
+			hidden
+		/>
+	</div>
+	<!-- ICONS -->
+	<div class="flex p-2 pl-14">
+		<div
+			class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800"
+			@click="handleImageClick"
+		>
+			<UIIconImage />
+		</div>
+		<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
+			<UIIcoonGif />
+		</div>
+		<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
+			<UIIconChart />
+		</div>
+		<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
+			<UIIconEmoji />
+		</div>
+		<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
+			<UIIconCalendar />
 		</div>
 	</div>
 	<div>
