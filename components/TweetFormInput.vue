@@ -15,6 +15,8 @@ const props = defineProps({
 
 const emits = defineEmits(['on-submit']);
 
+const isDisabled = computed(() => text.value === '');
+
 function handleFormSubmit() {
 	emits('on-submit', {
 		text: text.value,
@@ -80,29 +82,37 @@ function handleImageChange(event) {
 			hidden
 		/>
 	</div>
-	<!-- ICONS -->
 	<div class="flex p-2 pl-14">
-		<div
-			class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800"
-			@click="handleImageClick"
-		>
-			<UIIconImage />
+		<div class="flex w-full text-white">
+			<!-- ICONS -->
+			<div
+				class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800"
+				@click="handleImageClick"
+			>
+				<UIIconImage />
+			</div>
+			<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
+				<UIIcoonGif />
+			</div>
+			<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
+				<UIIconChart />
+			</div>
+			<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
+				<UIIconEmoji />
+			</div>
+			<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
+				<UIIconCalendar />
+			</div>
 		</div>
-		<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
-			<UIIcoonGif />
+		<div class="ml-auto">
+			<UIButtonTweet
+				size="sm"
+				:disabled="isDisabled"
+				@onClick="handleFormSubmit"
+			>
+				<span class="font-bold"> Tweet </span>
+			</UIButtonTweet>
 		</div>
-		<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
-			<UIIconChart />
-		</div>
-		<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
-			<UIIconEmoji />
-		</div>
-		<div class="p-2 text-blue-400 rounded-full hover:bg-blue-50 dark:hover:bg-dim-800">
-			<UIIconCalendar />
-		</div>
-	</div>
-	<div>
-		<button @click="handleFormSubmit">Tweet</button>
 	</div>
 </template>
 

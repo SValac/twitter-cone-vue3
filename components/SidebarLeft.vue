@@ -7,7 +7,8 @@ import {
 	BookmarkIcon,
 	DocumentTextIcon,
 	UserIcon,
-	EllipsisHorizontalCircleIcon
+	EllipsisHorizontalCircleIcon,
+	PencilIcon
 } from '@heroicons/vue/24/outline';
 const { defaultTransition } = useTailwindConfig();
 </script>
@@ -72,6 +73,21 @@ const { defaultTransition } = useTailwindConfig();
 				</template>
 				<template v-slot:name> More </template>
 			</SidebarLeftTab>
+			<div class="hidden xl:block">
+				<UIButtonTweet
+					liquid
+					size="lg"
+				>
+					<span class="font-bold">Tweet</span>
+				</UIButtonTweet>
+			</div>
+			<div class="block xl:hidden">
+				<UIButtonTweet>
+					<div class="w-6 h-6 font-bold">
+						<PencilIcon />
+					</div>
+				</UIButtonTweet>
+			</div>
 		</menu>
 	</nav>
 </template>
