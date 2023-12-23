@@ -16,7 +16,23 @@ export default () => {
 		});
 	};
 
+	const getHomeTweets = () => {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const response = await useFetchApi('/api/tweets', {
+					method: 'GET'
+				});
+				// console.log(response);
+				// resolve so it wont loop infinite
+				resolve(response);
+			} catch (error) {
+				reject(error);
+			}
+		});
+	};
+
 	return {
-		postTweet
+		postTweet,
+		getHomeTweets
 	};
 };
