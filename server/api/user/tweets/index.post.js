@@ -44,6 +44,13 @@ export default defineEventHandler(async (event) => {
 		authorId: userId
 	};
 
+	// check for replyTo
+	const replyTo = fields.replyTo[0];
+	console.log('replyTo value ->', replyTo);
+	if (replyTo && replyTo !== 'null') {
+		tweetData.replyToId = replyTo;
+	}
+
 	// create a tweet with tweetData
 	const tweet = await createTweet(tweetData);
 
