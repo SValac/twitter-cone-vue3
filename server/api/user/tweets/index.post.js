@@ -46,7 +46,6 @@ export default defineEventHandler(async (event) => {
 
 	// check for replyTo
 	const replyTo = fields.replyTo[0];
-	console.log('replyTo value ->', replyTo);
 	if (replyTo && replyTo !== 'null') {
 		tweetData.replyToId = replyTo;
 	}

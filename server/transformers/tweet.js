@@ -3,7 +3,6 @@ import { userTransformer } from './user';
 import ago from 's-ago';
 
 export const tweetTransformer = (tweet) => {
-	console.log(tweet.replies ? tweet.replies.length : 'false');
 	return {
 		id: tweet.id,
 		text: tweet.text,

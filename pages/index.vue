@@ -5,7 +5,7 @@ const { getHomeTweets } = useTweets();
 const loading = ref(false);
 const { useAuthUser } = useAuth();
 
-const homeTweets = ref([{ 2: 2 }, { 2: 1 }]);
+const homeTweets = ref([]);
 
 const user = useAuthUser();
 
