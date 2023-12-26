@@ -26,6 +26,9 @@ const props = defineProps({
 					class="w-full rounded-2xl"
 				/>
 			</div>
+			<div class="mt-2">
+				<TweetItemActions />
+			</div>
 		</div>
 	</div>
 </template>

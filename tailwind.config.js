@@ -3,6 +3,18 @@ export default {
 	content: [],
 	darkMode: 'class',
 
+	// tailwind donest not include un used clases in fnal CSS so if we have dynamic clases we can save it in safelist to use them
+	safelist: [
+		{
+			pattern: /text-(red|green|blue)-(100|400)/,
+			variants: ['group-hover']
+		},
+		{
+			pattern: /bg-(red|green|blue)-(100|400)/,
+			variants: ['group-hover']
+		}
+	],
+
 	theme: {
 		screens: {
 			xs: '614px',
