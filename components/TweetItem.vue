@@ -10,7 +10,7 @@ const props = defineProps({
 
 <template>
 	<div>
-		<TweetItemHeader :tweet="tweet" />
+		<TweetItemHeader :tweet="props.tweet" />
 		<div class="ml-16">
 			<p class="flex-shrink font-medium text-gray-800 dark:text-white">
 				{{ props.tweet.text }}
@@ -27,7 +27,7 @@ const props = defineProps({
 				/>
 			</div>
 			<div class="mt-2">
-				<TweetItemActions />
+				<TweetItemActions :tweet="props.tweet" />
 			</div>
 		</div>
 	</div>
