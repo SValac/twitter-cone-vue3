@@ -4,14 +4,19 @@ const props = defineProps({
 	tweet: {
 		type: Object,
 		required: true
+	},
+	compact: {
+		type: Boolean,
+		default: false
 	}
 });
+const tweetBodyWrapper = computed(() => (props.compact ? 'ml-16' : 'ml-2 mt-4'));
 </script>
 
 <template>
 	<div>
 		<TweetItemHeader :tweet="props.tweet" />
-		<div class="ml-16">
+		<div :class="tweetBodyWrapper">
 			<p class="flex-shrink font-medium text-gray-800 dark:text-white">
 				{{ props.tweet.text }}
 			</p>

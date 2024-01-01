@@ -25,7 +25,10 @@ const isEmptyArray = computed(() => props.tweets.length === 0);
 			class="pb-4 border-b cursor-pointer hover:bg-gray-100 hover:dark:bg-dim-300"
 			:class="[twitterBorderColor, defaultTransition]"
 		>
-			<TweetItem :tweet="tweet" />
+			<TweetItem
+				:tweet="tweet"
+				compact
+			/>
 		</div>
 		<!--continue video in  4:40:10  -->
 	</div>
