@@ -14,7 +14,7 @@ export const tweetTransformer = (tweet) => {
 		// !! transofmr falsy o thrty value in boolean
 		replyTo: !!tweet.replyTo ? tweetTransformer(tweet.replyTo) : null,
 		// get number of replies
-		repliesCount: tweet.replies ? tweet.replies.length : 0,
+		repliesCount: !!tweet.replies ? tweet.replies.length : 0,
 		postedAtAgo: ago(tweet.createdAt)
 	};
 };

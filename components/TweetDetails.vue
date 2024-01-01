@@ -19,6 +19,7 @@ const replies = computed(() => props.tweet?.replies || []);
 		<TweetForm
 			placeholder="Tweet your Reply"
 			:user="props.user"
+			:reply-to="props.tweet"
 		/>
 		<TweetListFeed :tweets="replies" />
 	</div>

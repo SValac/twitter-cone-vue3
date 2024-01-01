@@ -10,39 +10,77 @@ const props = defineProps({
 	tweet: {
 		type: Object,
 		required: true
+	},
+	compact: {
+		type: Boolean,
+		default: false
 	}
 });
+const showStats = computed(() => props.compact);
+const size = computed(() => (props.compact ? 5 : 8));
 function generateRancomNumber() {
 	return Math.floor(Math.random() * 100);
 }
 </script>
 <template>
 	<div class="flex items-center justify-around w-full">
-		<TweetItemActionsIcon color="blue">
+		<TweetItemActionsIcon
+			color="blue"
+			:size="size"
+		>
 			<!-- iconSlot is a name variable which has props from icon slot -->
 			<template v-slot:icon="iconSlot">
 				<RepliesIcon :class="iconSlot.classes" />
 			</template>
-			<template v-slot:default> {{ props.tweet.repliesCount }} </template>
+			<template
+				v-if="showStats"
+				v-slot:default
+			>
+				{{ props.tweet.repliesCount }}
+			</template>
 		</TweetItemActionsIcon>
 		<!-- using destructurin to extract classses -->
-		<TweetItemActionsIcon color="green">
+		<TweetItemActionsIcon
+			color="green"
+			:size="size"
+		>
 			<template v-slot:icon="{ classes }">
 				<RefreshIcon :class="classes" />
 			</template>
-			<template v-slot:default> {{ generateRancomNumber() }} </template>
+			<template
+				v-if="showStats"
+				v-slot:default
+			>
+				{{ generateRancomNumber() }}
+			</template>
 		</TweetItemActionsIcon>
-		<TweetItemActionsIcon color="red">
+		<TweetItemActionsIcon
+			color="red"
+			:size="size"
+		>
 			<template v-slot:icon="{ classes }">
 				<LikeIcon :class="classes" />
 			</template>
-			<template v-slot:default> {{ generateRancomNumber() }} </template>
+			<template
+				v-if="showStats"
+				v-slot:default
+			>
+				{{ generateRancomNumber() }}
+			</template>
 		</TweetItemActionsIcon>
-		<TweetItemActionsIcon color="blue">
+		<TweetItemActionsIcon
+			color="blue"
+			:size="size"
+		>
 			<template v-slot:icon="{ classes }">
 				<UploadIcon :class="classes" />
 			</template>
-			<template v-slot:default> {{ generateRancomNumber() }} </template>
+			<template
+				v-if="showStats"
+				v-slot:default
+			>
+				{{ generateRancomNumber() }}
+			</template>
 		</TweetItemActionsIcon>
 	</div>
 </template>

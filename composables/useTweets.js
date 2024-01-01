@@ -4,9 +4,10 @@ export default () => {
 
 		// get the Text from form data
 		form.append('text', formData.text);
+		// get the replyTO form data
+		form.append('replyTo', formData.replyTo);
 
 		// get files from mediaFiles, iterate to get all files
-
 		formData.mediaFiles.forEach((mediaFile, index) => {
 			form.append(`media_file_${index}`, mediaFile);
 		});

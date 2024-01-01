@@ -9,6 +9,10 @@ const props = defineProps({
 	placeholder: {
 		type: String,
 		default: "What's happening?"
+	},
+	replyTo: {
+		type: Object,
+		default: null
 	}
 });
 
@@ -17,8 +21,10 @@ async function handleFormSubmit(data) {
 	try {
 		const response = await postTweet({
 			text: data.text,
-			mediaFiles: data.mediaFiles
+			mediaFiles: data.mediaFiles,
+			replyTo: props.replyTo?.id
 		});
+		console.log(response);
 		alert(JSON.stringify(response));
 	} catch (error) {
 		console.log(error);

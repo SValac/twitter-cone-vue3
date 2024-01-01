@@ -4,6 +4,10 @@ const props = defineProps({
 	color: {
 		type: String,
 		required: true
+	},
+	size: {
+		type: Number,
+		default: 5
 	}
 });
 </script>
@@ -14,7 +18,7 @@ const props = defineProps({
 		>
 			<slot
 				name="icon"
-				classes="w-5 h-5"
+				:classes="`w-${props.size} h-${props.size}`"
 			/>
 		</div>
 		<span :class="`ml-1 group-hover:text-${props.color}-400`">
