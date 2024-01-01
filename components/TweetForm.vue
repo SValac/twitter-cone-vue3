@@ -5,6 +5,10 @@ const props = defineProps({
 	user: {
 		type: Object,
 		required: true
+	},
+	placeholder: {
+		type: String,
+		default: "What's happening?"
 	}
 });
 
@@ -37,6 +41,7 @@ async function handleFormSubmit(data) {
 		<TweetFormInput
 			:user="props.user"
 			@on-submit="handleFormSubmit"
+			:placeholder="props.placeholder"
 		/>
 	</div>
 </template>
