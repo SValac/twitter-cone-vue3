@@ -1,6 +1,9 @@
 <script setup>
 const { postTweet } = useTweets();
 const loading = ref(false);
+
+//emit to handle suces tweet
+const emits = defineEmits(['onSuccess']);
 const props = defineProps({
 	user: {
 		type: Object,
@@ -24,8 +27,11 @@ async function handleFormSubmit(data) {
 			mediaFiles: data.mediaFiles,
 			replyTo: props.replyTo?.id
 		});
-		console.log(response);
-		alert(JSON.stringify(response));
+		// console.log(response);
+		// alert(JSON.stringify(response));
+
+		// emit on sucess
+		emits('onSuccess', response.tweet);
 	} catch (error) {
 		console.log(error);
 	} finally {
