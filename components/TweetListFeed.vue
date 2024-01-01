@@ -7,6 +7,11 @@ const props = defineProps({
 	}
 });
 const isEmptyArray = computed(() => props.tweets.length === 0);
+
+//navite to tweet
+function redirect(tweet) {
+	navigateTo(`/status/${tweet.id}`);
+}
 </script>
 
 <template>
@@ -24,6 +29,7 @@ const isEmptyArray = computed(() => props.tweets.length === 0);
 			:key="tweet.id"
 			class="pb-4 border-b cursor-pointer hover:bg-gray-100 hover:dark:bg-dim-300"
 			:class="[twitterBorderColor, defaultTransition]"
+			@click="redirect(tweet)"
 		>
 			<TweetItem
 				:tweet="tweet"
