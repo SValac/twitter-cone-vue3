@@ -32,7 +32,6 @@ async function getTweet() {
 
 onBeforeMount(() => {
 	getTweet();
-	console.log('this is the user', user);
 });
 </script>
 <template>
